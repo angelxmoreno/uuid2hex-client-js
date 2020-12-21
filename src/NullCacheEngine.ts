@@ -1,14 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export default class NullCacheEngine implements Cacheable {
-    getItem(key: string): Promise<string | null> {
+import { Cacheable } from './types';
+
+const NullCacheEngine: Cacheable = {
+    getItem(key: string): Promise<null> {
         return Promise.resolve(null);
-    }
+    },
 
     removeItem(key: string): Promise<void> {
         return Promise.resolve(undefined);
-    }
+    },
 
     setItem(key: string, value: string): Promise<void> {
         return Promise.resolve(undefined);
-    }
-}
+    },
+};
+
+export default NullCacheEngine;
