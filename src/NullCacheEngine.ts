@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Cacheable } from './types';
+
+import { Cacheable } from './UUID2HexClient';
 
 const NullCacheEngine: Cacheable = {
     getItem(key: string): Promise<null> {

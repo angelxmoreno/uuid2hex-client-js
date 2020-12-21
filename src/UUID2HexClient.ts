@@ -1,7 +1,21 @@
 import axios, { AxiosInstance } from 'axios';
 import { UUIDv4 } from 'uuid-v4-validator';
-import { Cacheable, ServerData } from './types';
 import NullCacheEngine from './NullCacheEngine';
+
+export type Cacheable = {
+    getItem(key: string): Promise<string | null>;
+    setItem(key: string, value: string): Promise<void>;
+    removeItem(key: string): Promise<void>;
+};
+
+export type ServerData = {
+    statusCode: number;
+    data: {
+        error?: string;
+        uuid?: string;
+        hex?: string;
+    };
+};
 
 export default class UUID2HexClient {
     static defaultPrefix = 'UUID2HexClient';

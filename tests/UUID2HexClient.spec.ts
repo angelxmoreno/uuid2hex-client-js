@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import chai, { expect } from 'chai';
 import UUID2HexClient from '../src/UUID2HexClient';
 import axios from 'axios';
 import NullCacheEngine from '../src/NullCacheEngine';
-import { Cacheable } from '../src/types';
 import chaiAsPromised from 'chai-as-promised';
+import { CacheableInterface } from '../src';
 
 chai.should();
 chai.use(chaiAsPromised);
@@ -26,7 +28,7 @@ describe('UUID2HexClient', () => {
         });
 
         it('uses a cacheable instance when one is provided', () => {
-            const cache: Cacheable = {
+            const cache: CacheableInterface = {
                 setItem: (key, value) => Promise.resolve(),
                 removeItem: (key) => Promise.resolve(),
                 getItem: (key) => Promise.resolve(''),
