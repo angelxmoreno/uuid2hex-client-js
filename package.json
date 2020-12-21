@@ -1,11 +1,14 @@
 {
     "name": "uuid2hex-client-js",
-    "version": "1.0.0",
-    "main": "index.js",
+    "version": "0.0.0",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "repository": "git@github.com:angelxmoreno/uuid2hex-client-js.git",
     "author": "Angel X. Moreno <angelxmoreno@gmail.com>",
     "license": "MIT",
     "scripts": {
+        "prepublish": "yarn build",
+        "build": "yarn rimraf dist && yarn tsc",
         "lint:fix": "yarn eslint:fix && yarn prettier:fix",
         "lint:check": "yarn eslint:check && yarn prettier:check",
         "eslint:fix": "eslint --fix --cache .",
@@ -29,6 +32,7 @@
         "mocha": "^8.2.1",
         "nyc": "^15.1.0",
         "prettier": "^2.2.1",
+        "rimraf": "^3.0.2",
         "ts-node": "^9.1.1",
         "typescript": "^4.1.3"
     },
