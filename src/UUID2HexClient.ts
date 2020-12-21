@@ -1,8 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
-import NullCacheEngine from './NullCacheEngine';
 import { UUIDv4 } from 'uuid-v4-validator';
+import { Cacheable, ServerData } from './types';
+import NullCacheEngine from './NullCacheEngine';
 
 export default class UUID2HexClient {
+    static defaultPrefix = 'UUID2HexClient';
     serverUrl: string;
     http: AxiosInstance;
     cache: Cacheable;
@@ -11,8 +13,8 @@ export default class UUID2HexClient {
     constructor(serverUrl: string, http?: AxiosInstance, cache?: Cacheable, cachePrefix?: string) {
         this.serverUrl = serverUrl;
         this.http = http || axios.create();
-        this.cache = cache || new NullCacheEngine();
-        this.cachePrefix = cachePrefix || 'UUID2HexClient';
+        this.cache = cache || NullCacheEngine;
+        this.cachePrefix = cachePrefix || UUID2HexClient.defaultPrefix;
     }
 
     async getHex(uuid: string): Promise<string | null> {
