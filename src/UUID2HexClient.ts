@@ -16,28 +16,31 @@ export default class UUID2HexClient {
         this.cachePrefix = cachePrefix || 'UUID2HexClient';
     }
     
-    async getHex(uuid: string): Promise<string> {
+    async getHex(uuid: string): Promise<string | null> {
         const isValidUUID = UUIDv4.validate(uuid);
         if (!isValidUUID) {
             throw new Error('Can not get hex for uuid: Invalid UUID provided');
         }
-        
+    
         const cacheKey = this.cachePrefix + uuid.replace('_', '');
         const cachedResponse = await this.cache.getItem(cacheKey);
         if (cachedResponse) {
             return cachedResponse;
         }
-        
+    
         const response = await axios.post<ServerData>(`${this.serverUrl}`, {uuid});
         const {statusCode, data} = response.data;
         const {error, hex} = data;
-        
+    
         if (error || statusCode !== 200) {
             throw new Error(`Can not get hex for uuid: ${error}`)
         }
-        
-        await this.cache.setItem(cacheKey, hex!);
-        
-        return hex!;
+    
+        if (hex) {
+            await this.cache.setItem(cacheKey, hex);
+            return hex;
+        }
+    
+        return null;
     }
 }
