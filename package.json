@@ -1,9 +1,11 @@
 {
     "name": "uuid2hex-client-js",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "files": ["dist/"],
+    "files": [
+        "dist/"
+    ],
     "repository": "git@github.com:angelxmoreno/uuid2hex-client-js.git",
     "author": "Angel X. Moreno <angelxmoreno@gmail.com>",
     "license": "MIT",
